@@ -26,17 +26,8 @@ namespace Rivet
 	private:
 		const int N_CENT_TYPES = 3; // number of centrality bins that you need to worry about, this case three, 0-20, 20-40, 40-60
 		const int CENT_TYPE_EDGES[N_CENT_TYPES][3] = { {0,20},{20,40},{40,60} }; // 0-20, 20-40, 40-60
-		//**Julien's Notes**
-		//	Here James starts off by using the centrality type to help name his histograms later in a for loop on line 87. However,
-		//	That doesn't work for mine since the name of his "y" part of his histograms corresponds to centrality while mine depends on whether
-		//	the scatterplot is a p+p collision or a Au+Au collision, where y01 is p+p and y02 is Au+Au. 
-		//	There are 20 plots that my analysis needs to create where d(01-d04)-x01-y(01/02) are 0-20% centrality. These 8 data sets from the yoda files
-		//	need to only make 4 scatter plots. This is true for d05-d08 for 20-40% centrality, and again for d09-d12 for 40-60% centrality.
-		//	There are then 4 IAA plots with respect to pT and 4 IAA plots with respect to zT.
-		//	Another problem is I think that the pT bins for the analysis portion are assigned based on the name of the plot, but my yoda plots are organized weird. 
-		//	For example, yields 1, 5, and 9 are 5-7 bin, along with IAA and IAAz. Yields 2, 6, 10  are 7-9. Yields 3, 7, 11 are 9-12. Yields 4, 8, 12 are 12-15.
-		//	***
-		//histograms; Yours will almost certainly be different
+		
+		
 		//Histo1DPtr _h1dPhi[N_CENT_TYPES]; // delta phi, split by centrality
 		scatter2DPtr _yield[24];
 		scatter2DPtr _IAA[4];
@@ -47,7 +38,6 @@ namespace Rivet
 		unsigned long long int nTrigger[N_CENT_TYPES];
 
 	public:
-		/// Constructor
 		PHENIX_2009_I815824():HeavyIonAnalysis("PHENIX_2009_I815824") {}
 
 		/// Book histograms and initialise projections before the run
@@ -144,7 +134,6 @@ namespace Rivet
 			//  will give a centrality outside of 0-100, specifically -1.0
 			if ((c < 0.) || (c > 100.)) vetoEvent;
 
-			/// **Julien's Note**
 			/// commented out the code below since I think the above code is cleaner, but left it incase I or someone else decided to use it instead in the future.
 			/// ***
 			// Alternatively, you may want to set the acceptance to a narrower range based on what your paper plots
@@ -187,7 +176,7 @@ namespace Rivet
 					// Only include associated particles with pT less than the trigger
 					if (partAssoc.pt() < partTrigger.pt()) {
 						deltaPhi = partAssoc.phi() - partTrigger.phi();
-						// In this fake paper plots run from 0 - 2 pi ***J*** my plots are at pi so I believe this is okay to leave. 
+					
 						//   so make sure deltaPhi falls in this range
 						// M_PI is part of the <math.h> header. You need to use the define: #define _USE_MATH_DEFINES
 						//   See header includes at top of file for example
@@ -229,6 +218,6 @@ namespace Rivet
 		}
 	};
 
-	// The hook for the plugin system
+
 	DECLARE_RIVET_PLUGIN(PHENIX_2009_I815824);
 }
