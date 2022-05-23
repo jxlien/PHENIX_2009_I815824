@@ -10,11 +10,9 @@
 namespace Rivet
 {
 /// **********************************************************************************
-/// This is a fake analysis calculating correlation functions off of trigger particles.
-/// This code is written as if the reference paper has the following methodology:
-///   It plots over events in the 10-30% and 50-80% centrality range, but that data is seperate
+///   plots over events in the 10-30% and 50-80% centrality range, but that data is seperate
 ///   Triggers particles are defined as Pi0s with 13 GeV < pT < 20 GeV or
-///      gamma particles with 8 GeV < pT < 20 GeV. Both are |eta| < 1.0
+///   gamma particles with 8 GeV < pT < 20 GeV. Both are |eta| < 1.0
 ///   Associated partices are all charged hadrons with pT > 1.2 GeV and less than trigger pT
 
 
